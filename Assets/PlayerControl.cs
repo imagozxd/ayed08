@@ -6,6 +6,7 @@ using UnityEngine.Rendering;
 public class PlayerControl : MonoBehaviour
 {
     public NodeControl currentNode;
+    public CircularDoublyLinkedList otherCurrentNode;
     private Vector2 refVelocity;
     public float timeToMove;
     public float energy = 50.0f;
@@ -24,7 +25,7 @@ public class PlayerControl : MonoBehaviour
         }
         else
         {
-            transform.position = Vector2.SmoothDamp(transform.position, currentNode.transform.position, ref refVelocity, timeToMove);
+            transform.position = Vector2.SmoothDamp(transform.position, otherCurrentNode.transform.position, ref refVelocity, timeToMove);
         }
     }
     private void OnTriggerEnter2D(Collider2D collision)
@@ -34,7 +35,7 @@ public class PlayerControl : MonoBehaviour
             print("impacto");
             currentNode = collision.gameObject.GetComponent<NodeControl>().GetNextNode();
             print("se ira al: " + currentNode);
-            
+            /*
             NodeControl nextNode = collision.gameObject.GetComponent<NodeControl>();
             print("medio: " + currentNode);
             print("nextNode: " + nextNode);
@@ -49,7 +50,7 @@ public class PlayerControl : MonoBehaviour
                 currentExhaustedTime = exhaustedTime;
             }
             print("despues: "+currentNode);
-            
+            */
         }
     }
 }
